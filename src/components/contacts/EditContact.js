@@ -1,32 +1,37 @@
-import React, { Component } from 'react';
-import TextInputGroup from '../layout/TextInputGroup';
+import React, { Component } from "react";
+import TextInputGroup from "../layout/TextInputGroup";
+import propTypes from "prop-types";
+import { connect } from "react-redux";
+import { getContact } from "../../actions/contactActions";
 
 class EditContact extends Component {
   state = {
-    name: '',
-    email: '',
-    phone: '',
+    info: {
+      name: "",
+      email: "",
+      phone: ""
+    },
     errors: {}
   };
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
 
     const { name, email, phone } = this.state;
 
     // Check For Errors
-    if (name === '') {
-      this.setState({ errors: { name: 'Name is required' } });
+    if (name === "") {
+      this.setState({ errors: { name: "Name is required" } });
       return;
     }
 
-    if (email === '') {
-      this.setState({ errors: { email: 'Email is required' } });
+    if (email === "") {
+      this.setState({ errors: { email: "Email is required" } });
       return;
     }
 
-    if (phone === '') {
-      this.setState({ errors: { phone: 'Phone is required' } });
+    if (phone === "") {
+      this.setState({ errors: { phone: "Phone is required" } });
       return;
     }
 
@@ -42,13 +47,13 @@ class EditContact extends Component {
 
     // Clear State
     this.setState({
-      name: '',
-      email: '',
-      phone: '',
+      name: "",
+      email: "",
+      phone: "",
       errors: {}
     });
 
-    this.props.history.push('/');
+    this.props.history.push("/");
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -98,4 +103,17 @@ class EditContact extends Component {
   }
 }
 
-export default EditContact;
+// EditContact.propTypes = {
+//   getContact: propTypes.func.isRequired
+// };
+
+const mapStateToProps = state => {
+  return {
+    state: state.contact.contact
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(EditContact);

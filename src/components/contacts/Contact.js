@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { deleteContact } from "../../actions/contactActions";
+import { deleteContact, getContact } from "../../actions/contactActions";
 
 class Contact extends Component {
   state = {
@@ -12,6 +12,10 @@ class Contact extends Component {
   onDeleteClick = id => {
     //// DELETE CONTACT ////
     this.props.deleteContact(id);
+  };
+
+  onEditClick = id => {
+    this.props.getContact(id);
   };
 
   render() {
@@ -39,6 +43,7 @@ class Contact extends Component {
           <Link to={`contact/edit/${id}`}>
             <i
               className="fas fa-pencil-alt"
+              onClick={this.onEditClick.bind(this, id)}
               style={{
                 cursor: "pointer",
                 float: "right",
@@ -66,5 +71,5 @@ Contact.propTypes = {
 
 export default connect(
   null,
-  { deleteContact }
+  { deleteContact, getContact }
 )(Contact);
