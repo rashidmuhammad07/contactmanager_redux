@@ -1,3 +1,5 @@
+//Action file
+
 import {
   GET_CONTACTS,
   DELETE_CONTACT,
