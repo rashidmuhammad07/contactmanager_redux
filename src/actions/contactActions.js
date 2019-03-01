@@ -54,3 +54,15 @@ export const getContact = id => async dispatch => {
     payload: res.data
   });
 };
+
+export const updateContact = newContact => async dispatch => {
+  const res = await axios.post(
+    `https://jsonplaceholder.typicode.com/users`,
+    newContact
+  );
+  console.log(res.data);
+  dispatch({
+    type: UPDATE_CONTACT,
+    payload: res.data
+  });
+};
